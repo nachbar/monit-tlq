@@ -22,6 +22,12 @@ set mailserver "<%= node[:monit][:mailserver][:host] %>" port <%= node[:monit][:
   with timeout 30 seconds
   using hostname "<%= node[:monit][:mailserver][:hostname] %>"
 <% end %>
+set mail-format {
+  <% if node[:monit][:mailserver][:emailfrom] %> from: node[:monit][:mailserver][:emailfrom] <% end %>
+  <% if node[:monit][:mailserver][:emailreplyto] %> reply-to: node[:monit][:mailserver][:emailreplyto] <% end %>
+  <% if node[:monit][:mailserver][:emailsubject] %>  subject: node[:monit][:mailserver][:emailsubject] <% end %>
+  <% if node[:monit][:mailserver][:emailmessage] %>  message: node[:monit][:mailserver][:emailmessage] <% end %>
+ }
 <% end %>
 
 set httpd port 2812 and
